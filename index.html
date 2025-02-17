@@ -124,7 +124,7 @@
         }
         .register-button {
             background-color: #28a745;
-        }
+ }
         .register-button:hover {
             background-color: #218838;
         }
@@ -157,7 +157,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Image at the top -->
         <div class="image-container">
             <img src="https://via.placeholder.com/400x200" alt="Prediction Image">
         </div>
@@ -173,14 +172,12 @@
         <p style="text-align: center; font-size: 14px; color: #333;">"Register' बटन पर क्लिक करके एक नया account बनाएं। यदि आप इस मॉड का उपयोग पुराने account में करते हैं, तो हैक काम नहीं करेगा।"</p>
     </div>
 
-    <!-- Audio for sound effect -->
     <audio id="soundEffect">
         <source src="https://www.soundjay.com/button/beep-07.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Load history from local storage
         let predictionHistory = JSON.parse(localStorage.getItem('predictionHistory')) || [];
 
         function eulerTotient(n) {
@@ -208,21 +205,25 @@
 
         function makePrediction() {
             const periodNumber = document.getElementById('periodNumber').value;
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.innerText = '';
+            resultDiv.className = 'result';
+
             if (periodNumber < 100 || periodNumber > 999) {
-                alert("Please enter a valid 3-digit number.");
+                resultDiv.innerText = "Please enter a valid 3-digit number.";
+                resultDiv.className = 'result';
                 return;
             }
+
             const prediction = predictBigOrSmall(periodNumber);
-            const resultDiv = document.getElementById('result');
             resultDiv.innerText = prediction;
             resultDiv.className = `result ${prediction.includes("SMALL") ? 'small' : 'big'}`;
             resultDiv.style.display = 'block';
 
-            // Play sound effect
             const soundEffect = document.getElementById('soundEffect');
             soundEffect.play();
 
-            // Update history
             predictionHistory.push({ period: periodNumber, prediction });
             localStorage.setItem('predictionHistory', JSON.stringify(predictionHistory));
             updateHistory();
@@ -238,11 +239,10 @@
 
         function clearHistory() {
             predictionHistory = [];
-            localStorage.removeItem('predictionHistory');
+            localStorage.removeItem('prediction History');
             updateHistory();
         }
 
-        // Initialize history on page load
         updateHistory();
     </script>
 </body>
