@@ -200,7 +200,7 @@
 
         function predictBigOrSmall(periodNumber) {
             const prediction = (eulerTotient(parseInt(periodNumber)) % 10) >= 5;
-            return prediction ? "SMALL 🔴" : "BIGG 🟢";
+            return prediction ? "BIGG 🟢" : "SMALL 🔴";
         }
 
         function makePrediction() {
