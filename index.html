@@ -3,153 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Big or Small Prediction</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Premium Prediction Vip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: #333;
+            color: #fff;
+            overflow-x: hidden;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 25px;
+            padding: 40px;
             width: 90%;
-            max-width: 450px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeIn 0.5s ease-in-out;
+            max-width: 500px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
         }
         h1 {
             text-align: center;
-            color: #333;
+            font-size: 32px;
+            font-weight: 800;
+            color: #1e3c72;
             margin-bottom: 20px;
-            font-size: 28px;
-            font-weight: bold;
+            letter-spacing: 1.5px;
         }
         p {
             text-align: center;
             font-size: 16px;
-            margin-bottom: 20px;
-            font-weight: bold;
+            color: #7f8c8d;
+            margin-bottom: 25px;
         }
         .image-container {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .image-container img {
             max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .image-container img:hover {
+            transform: scale(1.05);
         }
         input[type="number"] {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 2px solid #28a745;
-            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+            background: #f9fbfc;
+            color: #333;
             font-size: 16px;
-            transition: border-color 0.3s;
-            background-color: #f8f9fa;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         input[type="number"]:focus {
-            border-color: #ff6f61;
+            border-color: #1e3c72;
+            box-shadow: 0 0 10px rgba(30, 60, 114, 0.3);
             outline: none;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
         button {
             width: 100%;
-            padding: 12px;
-            background-color: #ff6f61;
-            color: white;
+            padding: 15px;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            color: #fff;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 10px;
             font-size: 16px;
-            transition: background-color 0.3s, transform 0.3s;
-            font-weight: bold;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
         button:hover {
-            background-color: #ff4c3b;
-            transform: translateY(-2px);
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            transform: translateY(-3px);
+        }
+        .voice-btn {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            margin-top: 10px;
+        }
+        .voice-btn:hover {
+            background: linear-gradient(90deg, #c0392b, #e74c3c);
         }
         .result {
             margin-top: 20px;
-            font-size: 1.2em;
+            padding: 15px;
+            font-size: 20px;
             text-align: center;
-            color: #333;
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-weight: bold;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
             opacity: 0;
-            animation: fadeIn 0.5s ease-in-out forwards;
+            animation: fadeInResult 0.5s ease forwards;
         }
         .result.small {
-            background-color: #ffebee;
-            color: #d32f2f;
+            background: #ffebee;
+            color: #c0392b;
         }
         .result.big {
-            background-color: #e8f5e9;
-            color: #2e7d32;
+            background: #e8f5e9;
+            color: #27ae60;
         }
         .telegram-button, .register-button, .clear-button {
-            display: inline-block;
-            margin-top: 10px;
+            display: block;
+            margin-top: 15px;
             padding: 12px;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
             text-align: center;
-            width: 100%;
-            transition: background-color 0.3s;
-            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
         .telegram-button {
-            background-color: #0088cc;
+            background: #3498db;
+            color: #fff;
         }
         .telegram-button:hover {
-            background-color: #007bb5;
+            background: #2980b9;
+            transform: translateY(-3px);
         }
         .register-button {
-            background-color: #28a745;
- }
+            background: #f1c40f;
+            color: #333;
+        }
         .register-button:hover {
-            background-color: #218838;
+            background: #e2b607;
+            transform: translateY(-3px);
         }
         .clear-button {
-            background-color: #6c757d;
+            background: #95a5a6;
+            color: #fff;
         }
         .clear-button:hover {
-            background-color: #5a6268;
+            background: #7f8c8d;
+            transform: translateY(-3px);
         }
         .history {
-            margin-top: 20px;
-            font-size: 14px;
-            text-align: center;
-            color: #333;
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-weight: bold;
-            max-height: 150px;
+            margin-top: 25px;
+            padding: 15px;
+            background: #f9fbfc;
+            border-radius: 10px;
+            max-height: 180px;
             overflow-y: auto;
+            font-size: 14px;
+            color: #7f8c8d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: opacity 0.3s ease;
             opacity: 0;
-            animation: fadeIn 0.5s ease-in-out forwards;
+            animation: fadeInResult 0.5s ease forwards;
         }
-        @keyframes fadeIn {
+        @keyframes fadeInResult {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
@@ -158,18 +183,19 @@
 <body>
     <div class="container">
         <div class="image-container">
-            <img src="https://via.placeholder.com/400x200" alt="Prediction Image">
+            <img src="https://via.placeholder.com/400x200?text=Advanced+Prediction" alt="Prediction Image">
         </div>
-        <h1>PREMIUM PREDICTION</h1>
-        <p>Enter a period number (Last 3 digits):</p>
-        <input type="number" id="periodNumber" placeholder="Enter number" required min="100" max="999">
-        <button onclick="makePrediction()">Predict</button>
+        <h1>Premium Prediction web</h1>
+        <p>Enter or voice your 3-digit period number </p>
+        <input type="number" id="periodNumber" placeholder="Enter period" required min="0" max="999">
+        <button onclick="makePrediction()">Generate Prediction</button>
+        <button class="voice-btn" onclick="startVoiceInput()">Voice Input</button>
         <div class="result" id="result"></div>
-        <a href="https://t.me/TeamEarningZone" class="telegram-button">Join us on Telegram</a>
-        <a href="https://www.aakclub.com/#/register?invitationCode=88443456039" class="register-button">Register</a>
+        <a href="https://t.me/TeamEarningZone" class="telegram-button">Join Telegram</a>
+        <a href="https://www.aakclub.com/#/register?invitationCode=88443456039" class="register-button">Register Now</a>
         <button class="clear-button" onclick="clearHistory()">Clear History</button>
         <div class="history" id="history"></div>
-        <p style="text-align: center; font-size: 14px; color: #333;">"Register' बटन पर क्लिक करके एक नया account बनाएं। यदि आप इस मॉड का उपयोग पुराने account में करते हैं, तो हैक काम नहीं करेगा।"</p>
+        <p style="font-size: 14px; color: #7f8c8d;">"Register Now" se naya account banayein. Purane accounts unsupported hain.</p>
     </div>
 
     <audio id="soundEffect">
@@ -180,51 +206,56 @@
     <script>
         let predictionHistory = JSON.parse(localStorage.getItem('predictionHistory')) || [];
 
-        function eulerTotient(n) {
-            let result = n;
-            let p = 2;
-            while (p * p <= n) {
-                if (n % p === 0) {
-                    while (n % p === 0) {
-                        n = Math.floor(n / p);
-                    }
-                    result -= Math.floor(result / p);
-                }
-                p += 1;
-            }
-            if (n > 1) {
-                result -= Math.floor(result / n);
-            }
-            return result;
+        function logicA(period) {
+            return ((period * 2) + (period * 3) + Math.pow(period, 4)) % 100;
         }
 
-        function predictBigOrSmall(periodNumber) {
-            const prediction = (eulerTotient(parseInt(periodNumber)) % 10) >= 5;
-            return prediction ? "BIGG 🟢" : "SMALL 🔴";
+        function logicB(period) {
+            return ((period * 5) - (period * 6) + Math.pow(period, 7)) % 100;
+        }
+
+        function logicC(period) {
+            return ((period * 8) + (period * 9) - Math.pow(period, 10)) % 100;
+        }
+
+        function combinedLogic(period) {
+            const A = logicA(period);
+            const B = logicB(period);
+            const C = logicC(period);
+            return (A + B + C) % 10;
+        }
+
+        function advancedLogic(period) {
+            const combined = combinedLogic(period);
+            if (combined >= 5) return "BIG 🟢";
+            if (combined === 4) return "SMALL 🔴";
+            if (combined === 3) return "SMALL 🔴";
+            if (combined === 2) return "SMALL 🔴";
+            if (combined === 1) return "BIG 🟢";
+            return "SMALL 🔴"; // combined === 0
         }
 
         function makePrediction() {
-            const periodNumber = document.getElementById('periodNumber').value;
+            const periodInput = document.getElementById('periodNumber').value;
             const resultDiv = document.getElementById('result');
 
             resultDiv.innerText = '';
             resultDiv.className = 'result';
 
-            if (periodNumber < 100 || periodNumber > 999) {
-                resultDiv.innerText = "Please enter a valid 3-digit number.";
-                resultDiv.className = 'result';
+            // Ensure input is a 3-digit number
+            if (!periodInput || periodInput.length !== 3 || isNaN(periodInput) || periodInput < 0 || periodInput > 999) {
+                resultDiv.innerText = "Please enter a valid 3-digit period (000-999).";
                 return;
             }
 
-            const prediction = predictBigOrSmall(periodNumber);
-            resultDiv.innerText = prediction;
+            const periodNumber = parseInt(periodInput);
+            const prediction = advancedLogic(periodNumber);
+            const combinedValue = combinedLogic(periodNumber);
+            resultDiv.innerText = `${prediction} ( ${combinedValue})`;
             resultDiv.className = `result ${prediction.includes("SMALL") ? 'small' : 'big'}`;
-            resultDiv.style.display = 'block';
+            document.getElementById('soundEffect').play();
 
-            const soundEffect = document.getElementById('soundEffect');
-            soundEffect.play();
-
-            predictionHistory.push({ period: periodNumber, prediction });
+            predictionHistory.push({ period: periodInput, prediction, timestamp: new Date().toLocaleString() });
             localStorage.setItem('predictionHistory', JSON.stringify(predictionHistory));
             updateHistory();
         }
@@ -232,15 +263,41 @@
         function updateHistory() {
             const historyDiv = document.getElementById('history');
             historyDiv.innerHTML = predictionHistory.map(entry => 
-                `<p>Period: ${entry.period}, Prediction: ${entry.prediction}</p>`
+                `<p>${entry.timestamp} | Period: ${entry.period} | ${entry.prediction}</p>`
             ).join('');
-            historyDiv.style.display = 'block';
         }
 
         function clearHistory() {
             predictionHistory = [];
-            localStorage.removeItem('prediction History');
+            localStorage.removeItem('predictionHistory');
             updateHistory();
+        }
+
+        function startVoiceInput() {
+            if (!('webkitSpeechRecognition' in window)) {
+                alert("Voice input not supported in this browser.");
+                return;
+            }
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                const number = parseInt(transcript.replace(/\D/g, ''));
+                if (!isNaN(number) && number >= 0 && number <= 999) {
+                    const paddedNumber = String(number).padStart(3, '0');
+                    document.getElementById('periodNumber').value = paddedNumber;
+                    makePrediction();
+                } else {
+                    document.getElementById('result').innerText = "Invalid voice input. Say a number between 0 and 999.";
+                }
+            };
+            recognition.onerror = () => {
+                document.getElementById('result').innerText = "Voice input failed. Try again.";
+            };
+            recognition.start();
         }
 
         updateHistory();
